@@ -20,7 +20,7 @@
                             <small>↑ 0.0% from last month</small>
                         </div>
                         <div class="stat-icon" style="background:#5cb85c;">
-                            <i class="fa-solid fa-house-chimney text-white"></i>
+                            <i class="fa-solid fa-seedling text-white"></i>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             <span class="text-muted-sm">Total Area (ha) 10.33</span>
                         </div>
                         <div class="stat-icon" style="background:#f0ad4e;">
-                            <i class="fa-solid fa-seedling text-white"></i>
+                            <i class="fa-solid fa-tractor text-white"></i>
                         </div>
                     </div>
                 </div>
