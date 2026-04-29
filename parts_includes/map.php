@@ -17,8 +17,11 @@
                     <h4 style="font-size:28px; font-weight:700; margin-bottom:3px; color:#fff;">3</h4>
                     <small style="font-size:12px; color:#4ade80;">&#8593; 0.0% from last month</small>
                 </div>
-                <button class="btn btn-sm" style="background:rgba(255,255,255,0.18); color:#fff; border:1px solid rgba(255,255,255,0.3); padding:7px 16px; border-radius:7px;">
-                    View Details
+                    <button class="btn btn-sm" 
+                    style="background:rgba(255,255,255,0.18); color:#fff; border:1px solid rgba(255,255,255,0.3); padding:7px 16px; border-radius:7px; transition:background 0.2s, border 0.2s;"
+                    onmouseover="this.style.background='#1b68bb'; this.style.border='1px solid transparent';"
+                    onmouseout="this.style.background='rgba(255,255,255,0.18)'; this.style.border='1px solid rgba(255,255,255,0.3)';">
+                 View Details
                 </button>
             </div>
 
