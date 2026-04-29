@@ -15,23 +15,15 @@
 
     function applyChartTheme() {
         const c = getChartColors();
-
-        // Shared defaults
         Chart.defaults.color = c.tickColor;
-
-        // Bar Chart
         barChart.options.scales.x.grid.color = c.gridColor;
         barChart.options.scales.y.grid.color = c.gridColor;
         barChart.options.scales.x.ticks.color = c.tickColor;
         barChart.options.scales.y.ticks.color = c.tickColor;
         barChart.options.plugins.legend.labels.color = c.legendColor;
         barChart.update();
-
-        // Pie Chart
         pieChart.options.plugins.legend.labels.color = c.legendColor;
         pieChart.update();
-
-        // Right Bar Chart
         rightBarChart.options.scales.x.grid.color = c.gridColor;
         rightBarChart.options.scales.y.grid.color = c.gridColor;
         rightBarChart.options.scales.x.ticks.color = c.tickColor;
@@ -40,46 +32,24 @@
         rightBarChart.update();
     }
 
-    // ── BAR CHART ────────────────────────────────
+    // ── BAR CHART (hidden, kept for data compatibility) ──────────────────
     const barCtx = document.getElementById('barChart').getContext('2d');
     const barChart = new Chart(barCtx, {
         type: 'bar',
         data: {
             labels: ['Angeles City', 'City of San Fernando', 'Mabalacat City'],
             datasets: [
-                {
-                    label: 'Farmers',
-                    data: [1, 2, 1],
-                    backgroundColor: '#5b9bd5',
-                    borderRadius: 4,
-                },
-                {
-                    label: 'Farms',
-                    data: [2, 3, 2],
-                    backgroundColor: '#27ae60',
-                    borderRadius: 4,
-                }
+                { label: 'Farmers', data: [1, 2, 1], backgroundColor: '#5b9bd5', borderRadius: 4 },
+                { label: 'Farms',   data: [2, 3, 2], backgroundColor: '#27ae60', borderRadius: 4 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: { color: '#666' }
-                }
-            },
+            plugins: { legend: { position: 'top', labels: { color: '#666' } } },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: { color: '#f0f0f0' },
-                    ticks: { color: '#666' }
-                },
-                x: {
-                    grid: { display: false },
-                    ticks: { color: '#666' }
-                }
+                y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { color: '#666' } },
+                x: { grid: { display: false }, ticks: { color: '#666' } }
             }
         }
     });
@@ -90,21 +60,12 @@
         type: 'doughnut',
         data: {
             labels: ['Rice Farm'],
-            datasets: [{
-                data: [100],
-                backgroundColor: ['#5b9bd5'],
-                borderWidth: 2,
-            }]
+            datasets: [{ data: [100], backgroundColor: ['#5b9bd5'], borderWidth: 2 }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { color: '#666' }
-                }
-            },
+            plugins: { legend: { position: 'bottom', labels: { color: '#666' } } },
             cutout: '60%'
         }
     });
@@ -116,97 +77,268 @@
         data: {
             labels: ['Arayat', 'Lubao', 'Mabalacat City', 'Angeles', 'Macabebe', 'Guagua', 'San Luis', 'Bacolor', 'Minalin', 'Sta Rita'],
             datasets: [
-                { label: '3000', data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#6f42c1' },
-                { label: '2500', data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#e74c3c' },
-                { label: '2000', data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#17a2b8' },
-                { label: '1500', data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#f39c12' },
-                { label: '1000', data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#3498db' },
-                { label: '500',  data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#27ae60' },
-                { label: '0',    data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#8e44ad' },
+                { label: 'Farmers', data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#5b9bd5', borderRadius: 4 },
+                { label: 'Farms',   data: [0,0,0,0,0,0,0,0,0,0], backgroundColor: '#27ae60', borderRadius: 4 }
             ]
         },
         options: {
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { boxWidth: 12, font: { size: 10 }, color: '#666' }
-                }
-            },
+            plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 }, color: '#666' } } },
             scales: {
-                x: {
-                    max: 100,
-                    grid: { color: '#f0f0f0' },
-                    ticks: { font: { size: 10 }, color: '#666' }
-                },
-                y: {
-                    ticks: { font: { size: 10 }, color: '#666' },
-                    grid: { display: false }
-                }
+                x: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 10 }, color: '#666' } },
+                y: { ticks: { font: { size: 10 }, color: '#666' }, grid: { display: false } }
             }
         }
     });
 
-    // ── MAPLIBRE MAP ──────────────────────────────
-    const map = new maplibregl.Map({
-        container: 'map',
-        style: {
-            version: 8,
-            sources: {
-                esri: {
-                    type: 'raster',
-                    tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
-                    tileSize: 256,
-                    attribution: '© Esri | MapLibre',
-                },
-                osm: {
-                    type: 'raster',
-                    tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-                    tileSize: 256,
-                }
-            },
-            layers: [
-                {
-                    id: 'esri-tiles',
-                    type: 'raster',
-                    source: 'esri',
-                    minzoom: 0,
-                    maxzoom: 19,
-                },
-                {
-                    id: 'osm-labels',
-                    type: 'raster',
-                    source: 'osm',
-                    paint: { 'raster-opacity': 0.6 }
-                }
-            ]
-        },
-        center: [120.57, 15.18],
-        zoom: 8,
-    });
-
-    map.addControl(new maplibregl.NavigationControl(), 'top-left');
-
-    // ── AUTO RESIZE CHARTS ON WINDOW RESIZE ──────
     window.addEventListener('resize', function() {
         barChart.resize();
         pieChart.resize();
         rightBarChart.resize();
     });
 
-    // ── MAP CONTROLS TOGGLE ───────────────────────
-    function toggleMapControls() {
-        const body = document.getElementById('mapControlsBody');
-        const icon = document.getElementById('mapControlsIcon');
+    // ── HIMAWARI WEATHER SERVICE ──────────────────────────────────────────
+    class HimawariWeatherService {
+        constructor() {
+            this.baseUrl = 'https://www.data.jma.go.jp/mscweb/data/himawari';
+            this.updateInterval = 500;
+            this.intervalId = null;
+            this.currentFrameIndex = 0;
+            this.availableUrls = [];
+            this.isAnimating = false;
+        }
 
-        if (body.classList.contains('collapsed')) {
-            body.classList.remove('collapsed');
-            icon.className = 'bi bi-chevron-up';
+        getAllUrls(type = 'b13') {
+            const urls = [];
+            for (let hour = 0; hour < 24; hour++) {
+                for (let minute = 0; minute < 60; minute += 10) {
+                    const timeStr = String(hour).padStart(2, '0') + String(minute).padStart(2, '0');
+                    urls.push({ url: `${this.baseUrl}/img/se2/se2_${type}_${timeStr}.jpg`, time: timeStr, hour, minute });
+                }
+            }
+            return urls;
+        }
+
+        async findAvailableUrls(type = 'b13', onProgress = null) {
+            const allUrls = this.getAllUrls(type);
+            const available = [];
+            const timestamp = Date.now();
+            const batchSize = 10;
+            for (let i = 0; i < allUrls.length; i += batchSize) {
+                const batch = allUrls.slice(i, i + batchSize);
+                const results = await Promise.all(batch.map(async (item) => {
+                    try {
+                        const response = await fetch(item.url + '?t=' + timestamp, { method: 'HEAD', cache: 'no-cache' });
+                        return response.ok ? item : null;
+                    } catch { return null; }
+                }));
+                results.forEach(r => { if (r) available.push(r); });
+                if (onProgress) onProgress(Math.min(i + batchSize, allUrls.length), allUrls.length, available.length);
+            }
+            available.sort((a, b) => (a.hour * 60 + a.minute) - (b.hour * 60 + b.minute));
+            this.availableUrls = available;
+            return available;
+        }
+
+        getImageBounds() { return [[105, 29.1],[140, 29.1],[140, 0],[105, 0]]; }
+        getCurrentFrame() { return this.availableUrls.length === 0 ? null : this.availableUrls[this.currentFrameIndex]; }
+        nextFrame() {
+            if (this.availableUrls.length === 0) return null;
+            this.currentFrameIndex = (this.currentFrameIndex + 1) % this.availableUrls.length;
+            return this.getCurrentFrame();
+        }
+        startAnimation(callback) {
+            if (this.intervalId) clearInterval(this.intervalId);
+            this.isAnimating = true;
+            this._lastCallback = callback;
+            this.intervalId = setInterval(() => { if (this.isAnimating) callback(this.nextFrame()); }, this.updateInterval);
+        }
+        stopAnimation() {
+            this.isAnimating = false;
+            if (this.intervalId) { clearInterval(this.intervalId); this.intervalId = null; }
+        }
+    }
+
+    // ── GIS MAP CLASS ─────────────────────────────────────────────────────
+    class OpaGISMap {
+        constructor() {
+            this.map = null;
+            this.polygonLayers = [];
+            this.damagePolygonLayers = [];
+            this.markers = [];
+            this.currentPopup = null;
+            this.showBoundaries = true;
+            this.showDamage = true;
+            this.showWeather = false;
+            this.weatherType = 'b13';
+            this.weatherOpacity = 0.7;
+            this.weatherService = new HimawariWeatherService();
+        }
+
+        initialize() {
+            this.map = new maplibregl.Map({
+                container: 'map',   // POC uses id="map"
+                style: {
+                    version: 8,
+                    sources: {
+                        'satellite': {
+                            type: 'raster',
+                            tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+                            tileSize: 256,
+                            attribution: '&copy; Esri'
+                        },
+                        'labels': {
+                            type: 'raster',
+                            tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}'],
+                            tileSize: 256,
+                            attribution: '&copy; Esri'
+                        }
+                    },
+                    layers: [
+                        { id: 'satellite', type: 'raster', source: 'satellite', minzoom: 0, maxzoom: 22 },
+                        { id: 'labels',    type: 'raster', source: 'labels',    minzoom: 0, maxzoom: 22 }
+                    ]
+                },
+                center: [120.7117, 15.4817],
+                zoom: 9,
+                maxZoom: 20,
+                minZoom: 6
+            });
+
+            this.map.addControl(new maplibregl.NavigationControl(), 'top-right');
+            this.map.addControl(new maplibregl.FullscreenControl(), 'top-right');
+
+            this.map.on('load', async () => {
+                await this.addWeatherLayer();
+            });
+
+            this.setupFilterControls();
+        }
+
+        async addWeatherLayer() {
+            const bounds = this.weatherService.getImageBounds();
+            const timestamp = Date.now();
+            const placeholderUrl = `${this.weatherService.baseUrl}/img/se2/se2_${this.weatherType}_0000.jpg?t=${timestamp}`;
+            this.map.addSource('weather-layer', { type: 'image', url: placeholderUrl, coordinates: bounds });
+            this.map.addLayer({ id: 'weather-overlay', type: 'raster', source: 'weather-layer', paint: { 'raster-opacity': this.weatherOpacity }, layout: { visibility: 'none' } }, 'labels');
+        }
+
+        async startWeatherAnimation() {
+            const statusEl = document.getElementById('weatherStatus');
+            const timeDisplay = document.getElementById('weatherTimeDisplay');
+            const bounds = this.weatherService.getImageBounds();
+            if (statusEl) statusEl.textContent = '🔄 Scanning...';
+            await this.weatherService.findAvailableUrls(this.weatherType, (current, total, found) => {
+                if (statusEl) statusEl.textContent = `🔄 Scanning ${current}/${total} (${found} found)`;
+            });
+            const count = this.weatherService.availableUrls.length;
+            if (count === 0) { if (statusEl) statusEl.textContent = '❌ No images available'; return; }
+            if (statusEl) statusEl.textContent = `▶ Playing ${count} frames`;
+            this.weatherService._lastCallback = (frame) => {
+                if (!frame || !this.showWeather) return;
+                const ts = Date.now();
+                if (this.map.getSource('weather-layer')) {
+                    this.map.getSource('weather-layer').updateImage({ url: frame.url + '?t=' + ts, coordinates: bounds });
+                }
+                if (timeDisplay) timeDisplay.textContent = `${String(frame.hour).padStart(2,'0')}:${String(frame.minute).padStart(2,'0')} UTC`;
+                const fc = document.getElementById('weatherFrameCounter');
+                if (fc) fc.textContent = `${this.weatherService.currentFrameIndex + 1}/${count}`;
+            };
+            this.weatherService.startAnimation(this.weatherService._lastCallback);
+        }
+
+        async toggleWeatherLayer(show) {
+            this.showWeather = show;
+            const statusEl = document.getElementById('weatherStatus');
+            if (this.map.getLayer('weather-overlay')) {
+                this.map.setLayoutProperty('weather-overlay', 'visibility', show ? 'visible' : 'none');
+                if (show) {
+                    await this.startWeatherAnimation();
+                } else {
+                    this.weatherService.stopAnimation();
+                    if (statusEl) statusEl.textContent = '';
+                    const td = document.getElementById('weatherTimeDisplay'); if (td) td.textContent = '--:-- UTC';
+                    const fc = document.getElementById('weatherFrameCounter'); if (fc) fc.textContent = '-/-';
+                }
+            }
+            const weatherOptions = document.getElementById('weatherOptions');
+            if (weatherOptions) weatherOptions.style.display = show ? 'block' : 'none';
+        }
+
+        async setWeatherType(type) {
+            this.weatherType = type;
+            if (this.showWeather) {
+                this.weatherService.stopAnimation();
+                this.weatherService.availableUrls = [];
+                this.weatherService.currentFrameIndex = 0;
+                await this.startWeatherAnimation();
+            }
+        }
+
+        setWeatherOpacity(opacity) {
+            this.weatherOpacity = opacity;
+            if (this.map.getLayer('weather-overlay')) {
+                this.map.setPaintProperty('weather-overlay', 'raster-opacity', opacity);
+            }
+        }
+
+        setupFilterControls() {
+            const showBoundariesCb = document.getElementById('showBoundaries');
+            const showDamageCb     = document.getElementById('showDamage');
+            const showWeatherCb    = document.getElementById('showWeather');
+
+            if (showBoundariesCb) showBoundariesCb.addEventListener('change', (e) => {
+                this.showBoundaries = e.target.checked;
+            });
+            if (showDamageCb) showDamageCb.addEventListener('change', (e) => {
+                this.showDamage = e.target.checked;
+            });
+            if (showWeatherCb) showWeatherCb.addEventListener('change', (e) => {
+                this.toggleWeatherLayer(e.target.checked);
+            });
+
+            document.querySelectorAll('input[name="weatherType"]').forEach(r => {
+                r.addEventListener('change', (e) => { if (e.target.checked) this.setWeatherType(e.target.value); });
+            });
+
+            const wOpacity = document.getElementById('weatherOpacity');
+            const wOpacityVal = document.getElementById('weatherOpacityValue');
+            if (wOpacity && wOpacityVal) wOpacity.addEventListener('input', (e) => {
+                this.setWeatherOpacity(e.target.value / 100);
+                wOpacityVal.textContent = e.target.value + '%';
+            });
+
+            const wSpeed = document.getElementById('weatherSpeed');
+            const wSpeedVal = document.getElementById('weatherSpeedValue');
+            if (wSpeed && wSpeedVal) wSpeed.addEventListener('input', (e) => {
+                const speed = parseInt(e.target.value);
+                wSpeedVal.textContent = speed + 'ms';
+                this.weatherService.updateInterval = speed;
+                if (this.showWeather && this.weatherService.isAnimating) {
+                    this.weatherService.stopAnimation();
+                    this.weatherService.startAnimation(this.weatherService._lastCallback);
+                }
+            });
+        }
+    }
+
+    // ── MAP CONTROLS TOGGLE ───────────────────────
+    var _mapControlsOpen = true;
+    function opaToggleMapControls() {
+        var content = document.getElementById('legendContent');
+        var icon    = document.getElementById('toggleIcon');
+        if (!content) return;
+        _mapControlsOpen = !_mapControlsOpen;
+        if (_mapControlsOpen) {
+            content.style.maxHeight = '600px';
+            content.style.opacity   = '1';
+            if (icon) icon.style.transform = 'rotate(0deg)';
         } else {
-            body.classList.add('collapsed');
-            icon.className = 'bi bi-chevron-down';
+            content.style.maxHeight = '0';
+            content.style.opacity   = '0';
+            if (icon) icon.style.transform = 'rotate(180deg)';
         }
     }
 
@@ -215,7 +347,6 @@
         const panel = document.getElementById('themePanel');
         const icon  = document.getElementById('themeBtnIcon');
         const btn   = document.getElementById('themeToggleBtn');
-
         if (panel.style.right === '0px') {
             panel.style.right = '-320px';
             icon.className = 'bi bi-chevron-left';
@@ -233,25 +364,17 @@
         const toggle = document.getElementById('modeToggle');
         const circle = document.getElementById('modeToggleCircle');
         const label  = document.getElementById('modeLabel');
-
         body.classList.toggle('dark-mode');
-
         if (body.classList.contains('dark-mode')) {
-            // Switch to dark
             toggle.style.background = '#3aabcf';
             circle.style.left = '25px';
             label.textContent = 'Dark';
         } else {
-            // Switch to light
             toggle.style.background = '#ccc';
             circle.style.left = '3px';
             label.textContent = 'Light';
         }
-
-        // Update all charts to match the new theme
         applyChartTheme();
-
-        // Re-apply slider fills (they use inline style, need refresh)
         ['all', 'btn', 'input', 'table'].forEach(type => {
             const slider = document.getElementById(`${type}FontSlider`);
             const percent = ((slider.value - 70) / (130 - 70)) * 100;
@@ -268,16 +391,11 @@
     };
 
     function setColorTheme(theme) {
-        // Apply theme variables via data-theme on body
         document.body.setAttribute('data-theme', theme);
-
-        // Update active ring on swatch circles
         document.querySelectorAll('.color-theme-option').forEach(el => {
             el.style.boxShadow = '0 0 0 3px transparent';
         });
         document.querySelector(`[data-theme-swatch="${theme}"]`).style.boxShadow = '0 0 0 4px #6f42c1';
-
-        // Update bar chart dataset colors to match theme
         const accent = themeChartAccents[theme];
         barChart.data.datasets[0].backgroundColor = accent.bar1;
         barChart.data.datasets[1].backgroundColor = accent.bar2;
@@ -289,17 +407,12 @@
         value = parseInt(value);
         document.getElementById(`${type}FontValue`).textContent = value + '%';
         document.getElementById(`${type}FontSlider`).value = value;
-
         const percent = ((value - 70) / (130 - 70)) * 100;
         const trackRight = document.body.classList.contains('dark-mode') ? '#3a4556' : '#e0e0e0';
         document.getElementById(`${type}FontSlider`).style.background =
             `linear-gradient(to right, #48bde1 ${percent}%, ${trackRight} ${percent}%)`;
-
-        // At 100% (default), REMOVE the inline style entirely so the browser/Bootstrap
-        // base sizing takes over cleanly — avoids layout jump on Reset All
         const isDefault = (value === 100);
         const size = value / 100;
-
         if (type === 'all') {
             if (isDefault) document.body.style.removeProperty('font-size');
             else document.body.style.fontSize = size + 'rem';
@@ -325,25 +438,19 @@
     }
 
     function adjustFont(type, change) {
-        const slider  = document.getElementById(`${type}FontSlider`);
-        const newVal  = Math.min(130, Math.max(70, parseInt(slider.value) + change));
+        const slider = document.getElementById(`${type}FontSlider`);
+        const newVal = Math.min(130, Math.max(70, parseInt(slider.value) + change));
         updateFont(type, newVal);
     }
 
     // ── RESET ALL ─────────────────────────────────
     function resetAll() {
         ['all', 'btn', 'input', 'table'].forEach(type => updateFont(type, 100));
-
-        // Reset mode to light if currently dark
-        if (document.body.classList.contains('dark-mode')) {
-            toggleDarkMode();
-        }
-
-        // Reset color theme to default
+        if (document.body.classList.contains('dark-mode')) toggleDarkMode();
         setColorTheme('default');
     }
 
-    // ── INITIALIZE SLIDER FILLS ON PAGE LOAD ──────
+    // ── INITIALIZE ON PAGE LOAD ───────────────────
     document.addEventListener('DOMContentLoaded', function() {
         // Init slider fills
         ['all', 'btn', 'input', 'table'].forEach(type => {
@@ -351,8 +458,12 @@
             const percent = ((slider.value - 70) / (130 - 70)) * 100;
             slider.style.background = `linear-gradient(to right, #48bde1 ${percent}%, #e0e0e0 ${percent}%)`;
         });
-        // Set default theme swatch as active on page load
+        // Set default theme swatch active
         const activeSwatch = document.querySelector('[data-theme-swatch="default"]');
         if (activeSwatch) activeSwatch.style.boxShadow = '0 0 0 4px #6f42c1';
+
+        // Initialize GIS Map
+        const gisMap = new OpaGISMap();
+        gisMap.initialize();
     });
 </script>
