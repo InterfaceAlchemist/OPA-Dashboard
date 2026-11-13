@@ -2,7 +2,7 @@
 
 A geospatial agricultural dashboard for the **Office of Provincial Agriculture (OPA)** of Pampanga, built as a proof-of-concept frontend with PHP, Bootstrap 5 and MapLibre GL.
 
-**Live demo:** [your-opa-demo.vercel.app](https://your-opa-demo.vercel.app)
+**Live demo:** [opa-dashboard-green.vercel.app](https://opa-dashboard-green.vercel.app/)
 
 ![OPA Dashboard](./docs/dashboard.png)
 
@@ -19,9 +19,9 @@ A geospatial agricultural dashboard for the **Office of Provincial Agriculture (
 
 ## Screenshots
 
-| Himawari-8 satellite overlay (dark mode)      | Theme settings panel (Agriculture theme) |
-| --------------------------------------------- | ---------------------------------------- |
-| ![Satellite overlay](./docs/satellite_db.png) | ![Theme panel](./docs/theme_panel.png)   |
+| Himawari-8 satellite overlay (dark mode)     | Theme settings panel (Agriculture theme) |
+| -------------------------------------------- | ---------------------------------------- |
+| ![Satellite overlay](./docs/satellitedb.png) | ![Theme panel](./docs/themepanel.png)    |
 
 ## Built with
 
