@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="opa-logo.ico">
-    <title>PROJECT: OPA - Office of Provincional of Agriculture</title>
+    <title>PROJECT: OPA - Office of Provincional Agriculture</title>
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
